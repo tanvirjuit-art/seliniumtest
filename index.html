@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login & Registration</title>
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
@@ -19,53 +20,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #667eea;
             padding: 20px;
         }
 
-        .container {
+        .box {
             width: 100%;
-            max-width: 420px;
-            background: #fff;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .logo {
+        h2 {
             text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #777;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .tabs {
             display: flex;
-            margin-bottom: 25px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
         }
 
-        .tab {
+        .tabs button {
             width: 50%;
             padding: 12px;
             border: none;
-            background: transparent;
+            background: #eee;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
-            color: #777;
         }
 
-        .tab.active {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
+        .tabs button.active {
+            background: #667eea;
+            color: white;
         }
 
         .form {
@@ -76,139 +66,114 @@
             display: block;
         }
 
-        .input-group {
-            margin-bottom: 18px;
+        .input {
+            margin-bottom: 15px;
         }
 
-        .input-group label {
+        .input label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 6px;
             font-size: 14px;
-            font-weight: bold;
             color: #333;
         }
 
-        .input-group input {
+        .input input {
             width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            outline: none;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             font-size: 15px;
-            transition: 0.3s;
         }
 
-        .input-group input:focus {
+        .input input:focus {
+            outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
-        .forgot {
-            display: block;
-            text-align: right;
-            margin-top: -8px;
-            margin-bottom: 20px;
-            color: #667eea;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .btn {
+        .submit {
             width: 100%;
-            padding: 13px;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 6px;
+            background: #667eea;
             color: white;
             font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .terms {
-            font-size: 13px;
-            color: #777;
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-
-        .terms input {
-            margin-right: 6px;
+        .submit:hover {
+            background: #5568d9;
         }
 
         .message {
             text-align: center;
             margin-top: 15px;
             font-size: 14px;
-            display: none;
         }
 
         .success {
-            color: #198754;
+            color: green;
         }
 
         .error {
-            color: #dc3545;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-            }
+            color: red;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
 
-    <div class="logo">MyAccount</div>
-    <p class="subtitle">Welcome to your account</p>
+    <h2>My Account</h2>
 
-    <!-- Tabs -->
     <div class="tabs">
-        <button class="tab active" onclick="showForm('login', this)">
+        <button
+            id="loginTab"
+            class="active"
+            type="button"
+            onclick="showLogin()">
             Login
         </button>
 
-        <button class="tab" onclick="showForm('register', this)">
+        <button
+            id="registerTab"
+            type="button"
+            onclick="showRegister()">
             Register
         </button>
     </div>
 
-    <!-- Login Form -->
-    <form id="login" class="form active" onsubmit="loginUser(event)">
 
-        <div class="input-group">
-            <label>Email Address</label>
+    <!-- LOGIN -->
+
+    <form id="loginForm" class="form active">
+
+        <div class="input">
+            <label>Email</label>
+
             <input
                 type="email"
                 id="loginEmail"
-                placeholder="Enter your email"
-                required
-            >
+                placeholder="Enter email"
+                required>
         </div>
 
-        <div class="input-group">
+
+        <div class="input">
             <label>Password</label>
+
             <input
                 type="password"
                 id="loginPassword"
-                placeholder="Enter your password"
-                required
-            >
+                placeholder="Enter password"
+                required>
         </div>
 
-        <a href="#" class="forgot">Forgot Password?</a>
 
-        <button type="submit" class="btn">
+        <button
+            type="submit"
+            class="submit">
             Login
         </button>
 
@@ -217,69 +182,68 @@
     </form>
 
 
-    <!-- Registration Form -->
-    <form id="register" class="form" onsubmit="registerUser(event)">
+    <!-- REGISTER -->
 
-        <div class="input-group">
+    <form id="registerForm" class="form">
+
+        <div class="input">
             <label>Full Name</label>
+
             <input
                 type="text"
-                id="name"
-                placeholder="Enter your full name"
-                required
-            >
+                id="registerName"
+                placeholder="Enter your name"
+                required>
         </div>
 
-        <div class="input-group">
-            <label>Email Address</label>
+
+        <div class="input">
+            <label>Email</label>
+
             <input
                 type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
+                id="registerEmail"
+                placeholder="Enter email"
+                required>
         </div>
 
-        <div class="input-group">
-            <label>Phone Number</label>
+
+        <div class="input">
+            <label>Phone</label>
+
             <input
-                type="tel"
-                id="phone"
-                placeholder="Enter your phone number"
-                required
-            >
+                type="text"
+                id="registerPhone"
+                placeholder="Enter phone number"
+                required>
         </div>
 
-        <div class="input-group">
+
+        <div class="input">
             <label>Password</label>
+
             <input
                 type="password"
-                id="password"
-                placeholder="Create a password"
-                minlength="6"
-                required
-            >
+                id="registerPassword"
+                placeholder="Create password"
+                required>
         </div>
 
-        <div class="input-group">
+
+        <div class="input">
             <label>Confirm Password</label>
+
             <input
                 type="password"
-                id="confirmPassword"
-                placeholder="Confirm your password"
-                minlength="6"
-                required
-            >
+                id="registerConfirm"
+                placeholder="Confirm password"
+                required>
         </div>
 
-        <div class="terms">
-            <label>
-                <input type="checkbox" required>
-                I agree to the Terms & Conditions
-            </label>
-        </div>
 
-        <button type="submit" class="btn">
+        <button
+            type="submit"
+            class="submit">
             Create Account
         </button>
 
@@ -292,101 +256,161 @@
 
 <script>
 
-    // Login / Registration Tab
-    function showForm(formId, button) {
+    // Show Login
+    function showLogin() {
 
-        document.querySelectorAll(".form").forEach(form => {
-            form.classList.remove("active");
-        });
+        document.getElementById("loginForm")
+            .classList.add("active");
 
-        document.querySelectorAll(".tab").forEach(tab => {
-            tab.classList.remove("active");
-        });
+        document.getElementById("registerForm")
+            .classList.remove("active");
 
-        document.getElementById(formId).classList.add("active");
-        button.classList.add("active");
+        document.getElementById("loginTab")
+            .classList.add("active");
+
+        document.getElementById("registerTab")
+            .classList.remove("active");
+    }
+
+
+    // Show Register
+    function showRegister() {
+
+        document.getElementById("registerForm")
+            .classList.add("active");
+
+        document.getElementById("loginForm")
+            .classList.remove("active");
+
+        document.getElementById("registerTab")
+            .classList.add("active");
+
+        document.getElementById("loginTab")
+            .classList.remove("active");
     }
 
 
     // Registration
-    function registerUser(event) {
+    document.getElementById("registerForm")
+        .addEventListener("submit", function(event) {
 
         event.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const password = document.getElementById("password").value;
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
+        const name =
+            document.getElementById("registerName").value;
 
-        const message = document.getElementById("registerMessage");
+        const email =
+            document.getElementById("registerEmail").value;
 
-        if (password !== confirmPassword) {
+        const phone =
+            document.getElementById("registerPhone").value;
 
-            message.textContent = "Passwords do not match!";
-            message.className = "message error";
-            message.style.display = "block";
+        const password =
+            document.getElementById("registerPassword").value;
+
+        const confirm =
+            document.getElementById("registerConfirm").value;
+
+        const message =
+            document.getElementById("registerMessage");
+
+
+        if (password !== confirm) {
+
+            message.innerHTML =
+                "Passwords do not match!";
+
+            message.className =
+                "message error";
 
             return;
         }
 
-        // Demo registration
-        localStorage.setItem("user", JSON.stringify({
+
+        const user = {
             name: name,
             email: email,
             phone: phone,
             password: password
-        }));
+        };
 
-        message.textContent = "Registration successful!";
-        message.className = "message success";
-        message.style.display = "block";
 
-        event.target.reset();
-    }
+        localStorage.setItem(
+            "myUser",
+            JSON.stringify(user)
+        );
+
+
+        message.innerHTML =
+            "Registration successful!";
+
+        message.className =
+            "message success";
+
+
+        document.getElementById("registerForm").reset();
+
+    });
 
 
     // Login
-    function loginUser(event) {
+    document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
 
         event.preventDefault();
 
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
+        const email =
+            document.getElementById("loginEmail").value;
 
-        const message = document.getElementById("loginMessage");
+        const password =
+            document.getElementById("loginPassword").value;
 
-        const user = JSON.parse(localStorage.getItem("user"));
+        const message =
+            document.getElementById("loginMessage");
 
-        if (!user) {
 
-            message.textContent =
+        const savedUser =
+            localStorage.getItem("myUser");
+
+
+        if (!savedUser) {
+
+            message.innerHTML =
                 "No account found. Please register first.";
 
-            message.className = "message error";
-            message.style.display = "block";
+            message.className =
+                "message error";
 
             return;
         }
 
-        if (email === user.email && password === user.password) {
 
-            message.textContent =
-                "Login successful! Welcome " + user.name;
+        const user =
+            JSON.parse(savedUser);
 
-            message.className = "message success";
-            message.style.display = "block";
+
+        if (
+            email === user.email &&
+            password === user.password
+        ) {
+
+            message.innerHTML =
+                "Login successful! Welcome, " +
+                user.name;
+
+            message.className =
+                "message success";
 
         } else {
 
-            message.textContent =
-                "Invalid email or password.";
+            message.innerHTML =
+                "Wrong email or password.";
 
-            message.className = "message error";
-            message.style.display = "block";
+            message.className =
+                "message error";
         }
-    }
+
+    });
 
 </script>
 
